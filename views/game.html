@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Madlib Game</title>
+    <link rel="stylesheet" href="css/game.css" />
+  </head>
+
+  <body>
+    <h1>Let's Play Madlib!</h1>
+    <p>Please fill out the below fields:</p>
+    <form action="/madlib" id="text-entry-fields" method="POST">
+      <div>
+        <label for="name-field">Person's name: </label>
+        <input type="text" id="name-field" name="name" required />
+      </div>
+
+      <div>
+        <label for="color-field">A color: </label>
+        <input type="text" id="color-field" name="color" />
+      </div>
+
+      <div>
+        <label for="noun-field">A noun: </label>
+        <input type="text" id="noun-field" name="noun" />
+      </div>
+
+      <div>
+        <label for="adjective-field">An adjective: </label>
+        <input type="text" id="adjective-field" name="adjective" />
+      </div>
+      <div>
+        <input type="submit" />
+      </div>
+    </form>
+  </body>
+</html>

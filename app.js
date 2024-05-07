@@ -1,14 +1,15 @@
-import express from 'express';
-import morgan from 'morgan';
-import nunjucks from 'nunjucks';
+import express from "express";
+import morgan from "morgan";
+import nunjucks from "nunjucks";
+import sample from "lodash.sample";
 
 const app = express();
-const port = '8000';
+const port = "8000";
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public'));
-nunjucks.configure('views', {
+app.use(express.static("public"));
+nunjucks.configure("views", {
   autoescape: true,
   express: app,
 });
@@ -19,34 +20,52 @@ const server = app.listen(port, () => {
 });
 
 const COMPLIMENTS = [
-  'awesome',
-  'terrific',
-  'fantastic',
-  'neato',
-  'fantabulous',
-  'wowza',
-  'oh-so-not-meh',
-  'brilliant',
-  'ducky',
-  'coolio',
-  'incredible',
-  'wonderful',
-  'smashing',
-  'lovely',
+  "awesome",
+  "terrific",
+  "fantastic",
+  "neato",
+  "fantabulous",
+  "wowza",
+  "oh-so-not-meh",
+  "brilliant",
+  "ducky",
+  "coolio",
+  "incredible",
+  "wonderful",
+  "smashing",
+  "lovely",
 ];
 
 // Display the homepage
-app.get('/', (req, res) => {
-  res.render('index.html');
+app.get("/", (req, res) => {
+  res.render("index.html");
 });
 
 // Display a form that asks for the user's name.
-app.get('/hello', (req, res) => {
-  res.render('hello.html');
+app.get("/hello", (req, res) => {
+  res.render("hello.html");
 });
 
 // Handle the form from /hello and greet the user.
-app.get('/greet', (req, res) => {
-  const name = req.query.name || 'stranger';
-  res.render('greet.html.njk', { name: name });
+app.get("/greet", (req, res) => {
+  const compliment = sample(COMPLIMENTS);
+  const name = req.query.name || "stranger";
+  res.render("greet.html", {
+    name: name,
+    compliment: compliment,
+  });
+});
+
+app.get("/game", (req, res) => {
+  if (req.query.game === "no") {
+    res.render("goodbye.html");
+  } else if (req.query.game === "yes") {
+    res.render("game.html");
+  }
+});
+
+app.post("/madlib", (req, res) => {
+  const { name, color, noun, adjective } = req.body;
+  console.log(name, color, noun, adjective);
+  res.render("madlib.html", { name, color, noun, adjective });
 });
