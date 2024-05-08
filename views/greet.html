@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Greetings | Madlibs!</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
+{% extends 'base.html' %} {% block title %} Greetings | Madlibs! {% endblock %}
+{% block body %}
+<h1>Nice to meet you, {{ name }}.</h1>
+<p>You're very {{ compliment }}.</p>
+<form action="/game">
+  <p>Would you like to play a game?</p>
+  <input type="radio" name="game" value="yes" id="yes-radio" />
+  <label for="yes-radio">Yes</label>
 
-  <body>
-    <h1>Nice to meet you, {{ name }}.</h1>
-    <p>You're very {{ compliment }}.</p>
-    <form action="/game">
-      <p>Would you like to play a game?</p>
-      <input type="radio" name="game" value="yes" id="yes-radio" />
-      <label for="yes-radio">Yes</label>
-
-      <input type="radio" name="game" value="no" id="no-radio" />
-      <label for="no-radio">No</label>
-      <br />
-      <input type="submit" />
-    </form>
-  </body>
-</html>
+  <input type="radio" name="game" value="no" id="no-radio" />
+  <label for="no-radio">No</label>
+  <br />
+  <input type="submit" />
+</form>
+{% endblock %}

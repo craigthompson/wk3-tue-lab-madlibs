@@ -5,6 +5,7 @@ import sample from "lodash.sample";
 
 const app = express();
 const port = "8000";
+let userName = "";
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
@@ -50,6 +51,7 @@ app.get("/hello", (req, res) => {
 app.get("/greet", (req, res) => {
   const compliment = sample(COMPLIMENTS);
   const name = req.query.name || "stranger";
+  userName = name; // Save username for other pages
   res.render("greet.html", {
     name: name,
     compliment: compliment,
@@ -58,7 +60,7 @@ app.get("/greet", (req, res) => {
 
 app.get("/game", (req, res) => {
   if (req.query.game === "no") {
-    res.render("goodbye.html");
+    res.render("goodbye.html", { name: userName });
   } else if (req.query.game === "yes") {
     res.render("game.html");
   }

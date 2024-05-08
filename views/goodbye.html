@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Goodbye</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
-
-  <body>
-    <h1>Goodbye, you will be missed.</h1>
-  </body>
-</html>
+{% extends 'base.html' %} {% block title %} Goodbye {% endblock %} {% block body
+%}
+<h1>Goodbye, {{ name }}, you will be missed.</h1>
+{% endblock %}
